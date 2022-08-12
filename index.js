@@ -15,6 +15,7 @@ function startGame() {
 }
 
 function renderGame() {
+       
     cardsEl.textContent = `Cards: ${cards[0]} ${cards[1]}`;
     //show sum content on our page
     sumEl.textContent  = `Sum: ${sum}`
@@ -36,6 +37,9 @@ function newCard() {
     let newCard = Math.floor(Math.random() * 12) + 1;
     //add new random card to current sum
     sum += newCard;
+    //push newCard to the cards array
+    cards.push(newCard);
+    console.log(cards);
     //run startGame function
     renderGame();
 }

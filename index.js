@@ -1,6 +1,6 @@
 //randomize our cards
-let firstCard = Math.floor(Math.random() * 12) + 1;
-let secondCard = Math.floor(Math.random() * 12) + 1;
+let firstCard = getRandomNumber();
+let secondCard = getRandomNumber();
 let cards = [firstCard, secondCard];
 let sum = firstCard + secondCard
 let hasBlackJack = false
@@ -15,9 +15,12 @@ function startGame() {
 }
 
 function renderGame() {
-       
-    cardsEl.textContent = `Cards: ${cards[0]} ${cards[1]}`;
-    //show sum content on our page
+       // make this dynamic with for loop.
+    cardsEl.textContent = `Cards: `;
+    for(let i = 0; i < cards.length; i++){
+        cardsEl.textContent += cards[i] + " ";
+    }
+        //show sum content on our page
     sumEl.textContent  = `Sum: ${sum}`
         if (sum <= 20) {
         message = "Do you want to draw a new card?"
@@ -34,7 +37,7 @@ function renderGame() {
 
 function newCard() {
     //get new random card
-    let newCard = Math.floor(Math.random() * 12) + 1;
+    let newCard = getRandomNumber()
     //add new random card to current sum
     sum += newCard;
     //push newCard to the cards array
@@ -44,3 +47,8 @@ function newCard() {
     renderGame();
 }
 
+function getRandomNumber() {
+    let randomNumber = Math.floor(Math.random() * 12) + 1;
+    console.log(randomNumber);
+    return randomNumber;
+}

@@ -1,21 +1,25 @@
 //randomize our cards
-let firstCard = getRandomNumber();
-let secondCard = getRandomNumber();
-let cards = [firstCard, secondCard];
-let sum = firstCard + secondCard
+let cards = [];
+let sum = 0;
 let hasBlackJack = false
-let isAlive = true
+let isAlive = false
 let message = ""
 let messageEl = document.getElementById("message-el")
 let sumEl = document.querySelector("#sum-el")
 let cardsEl = document.querySelector("#cards-el")
 
+console.log(cards);
 function startGame() {
+    isAlive = true;
+    let firstCard = getRandomNumber();
+    let secondCard = getRandomNumber();
+    cards = [firstCard, secondCard];
+    sum = firstCard + secondCard;
     renderGame();
 }
 
 function renderGame() {
-       // make this dynamic with for loop.
+       // Dynamically present numbers as they are drawn using for loop.
     cardsEl.textContent = `Cards: `;
     for(let i = 0; i < cards.length; i++){
         cardsEl.textContent += cards[i] + " ";
@@ -36,19 +40,27 @@ function renderGame() {
 }
 
 function newCard() {
+    if(isAlive === true && hasBlackJack === false){
     //get new random card
-    let newCard = getRandomNumber()
+    let newCard = getRandomNumber();
     //add new random card to current sum
     sum += newCard;
     //push newCard to the cards array
     cards.push(newCard);
-    console.log(cards);
     //run startGame function
     renderGame();
+    }
 }
 
+//helper function to generate random card numbers
 function getRandomNumber() {
-    let randomNumber = Math.floor(Math.random() * 12) + 1;
-    console.log(randomNumber);
+    let randomNumber = Math.floor(Math.random() * 13) + 1;
+    //account for face cards
+    if(randomNumber > 10){
+        return 10;
+    }
+    if(randomNumber === 1){
+        return 11;
+    }
     return randomNumber;
 }
